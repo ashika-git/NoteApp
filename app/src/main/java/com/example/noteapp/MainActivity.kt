@@ -9,8 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.noteapp.data.NewDataSource
+import com.example.noteapp.model.Note
+import com.example.noteapp.screen.NoteScreen
 import com.example.noteapp.ui.theme.NoteAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +24,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NoteAppTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) {
-//
-//                }
+                val notes = remember {
+                    mutableStateListOf<Note>()
+                }
+//                    notes =  NewDataSource().loadNotes(),
+                NoteScreen(
+                    notes= notes,
+                    onAddNote = {
+                        notes.add(it)
+                    },
+                    onRemoveNote = {
+                        notes.remove(it)
+                    }
+                )
+
             }
         }
     }
