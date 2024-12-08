@@ -31,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.noteapp.R
@@ -39,6 +40,7 @@ import com.example.noteapp.components.NoteInputField
 import com.example.noteapp.data.NewDataSource
 import com.example.noteapp.model.Note
 import com.example.noteapp.ui.theme.NoteAppTheme
+import com.example.noteapp.util.formatDate
 import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -171,11 +173,16 @@ fun NoteRow(
             horizontalAlignment = Alignment.Start
             ) {
             Text(text = note.title,
-                style = MaterialTheme.typography.bodyMedium)
+                style = MaterialTheme.typography.titleMedium)
             Text(text = note.description,
-                style = MaterialTheme.typography.bodySmall)
+                style = MaterialTheme.typography.bodyMedium)
 //            Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
 //                style = MaterialTheme.typography.caption)
+            Text(text = formatDate(note.entryDate.time),
+                textAlign = TextAlign.End,
+                style = MaterialTheme.typography.bodySmall
+
+                )
         }
     }
 
